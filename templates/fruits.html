@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GREENGROCER</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet"> 
+
+    <!-- The above links (.css) are templates using in styling the interface for better user experience -->
+</head>
+<body>
+
+  <!-- A navbar is a common feature in all web-pages and the code is gotten from bootstrap navbar Components section  -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/index">Greengrocer</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <!-- All the href="/p" in every anchor_tag stores the file name of that section.
+              NB: Don't include the .html tag in the href.  THIS IS THE ROUTE used in the main.py file -->
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/fruits">Grocery</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/sales">Sales</a>
+              </li>
+             <li class="nav-item">
+                <a class="nav-link"  href="/dashboard">Dashboard</a>
+              </li>
+
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container">
+        <h1 style="text-align: center;">FRUITS & VEGETABLES </h1>
+
+        <!-- This Modal criies a form that enables user to add a new item in the fruits list -->
+
+        <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Add New Product
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">ADD NEW FRUIT/VEGETABLE</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <form action="/add_fruits" method="POST">
+  
+       <div class="mb-3">
+       <label for="formGroupExampleInput" class="form-label">Product Name</label>
+       <input type="text" name="fruit_name" class="form-control" placeholder="Enter Fruit/Vegetable name">
+       </div>
+
+       <div class="mb-3">
+       <label for="formGroupExampleInput" class="form-label">Buying Price</label>
+       <input type="text" name="buying_price" class="form-control" id="formGroupExampleInput" placeholder="Enter Buying Price">
+       </div>
+
+  <div class="mb-3">
+    <label for="formGroupExampleInput" class="form-label">Selling Price</label>
+    <input type="text" name="selling_price" class="form-control" id="formGroupExampleInput" placeholder="Enter Selling Price">
+  </div>
+  
+  <div class="mb-3">
+    <label for="formGroupExampleInput" class="form-label">Quantity</label>
+    <input type="text" name="quantity" class="form-control" id="formGroupExampleInput" placeholder="Enter Quantity">
+  </div>
+  <button type="submit" class="btn btn-primary" value="POST">Add Product</button>
+</form>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+        
+<br>
+<br>
+        
+
+ <table class="table" id="myTable">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Fruit/Vegetable Name</th>
+              <th scope="col">Buying Price</th>
+              <th scope="col">Selling Price</th>
+              <th scope="col">Stock Quantity</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            {% for fruit in myfruits %}
+            <tr>
+              <td> {{ fruit[0] }}</td>
+              <td> {{ fruit[1] }}</td>
+              <td> {{ fruit[2] }}</td>
+              <td> {{ fruit[3] }}</td>
+              <td> {{ fruit[4] }}</td>
+             
+            </tr>
+
+           {% endfor %}
+          
+
+          </tbody>
+        </table>
+       
+
+      </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script>
+      let table = new DataTable('#myTable');
+    </script>
+
+</body>
+</html>
